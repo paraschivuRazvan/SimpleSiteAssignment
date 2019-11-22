@@ -1,0 +1,74 @@
+<app-progress-spinner *ngIf="showLoading"></app-progress-spinner>
+<app-menu></app-menu>
+
+<div class="container">
+  <div class="heading">
+    Top teams with mosth arrests in NFL
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <!-- team column -->
+      <ng-container matColumnDef="Team">
+        <th mat-header-cell *matHeaderCellDef>Team</th>
+        <td mat-cell *matCellDef="let element">{{ element.Team }}</td>
+      </ng-container>
+
+      <!-- team_preffered_name column -->
+      <ng-container matColumnDef="Team_preffered_name">
+        <th mat-header-cell *matHeaderCellDef>Team preffered name</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.Team_preffered_name }}
+        </td>
+      </ng-container>
+
+      <!-- team_name column -->
+      <ng-container matColumnDef="Team_name">
+        <th mat-header-cell *matHeaderCellDef>Team name</th>
+        <td mat-cell *matCellDef="let element">{{ element.Team_name }}</td>
+      </ng-container>
+
+      <!-- team_city column -->
+      <ng-container matColumnDef="Team_city">
+        <th mat-header-cell *matHeaderCellDef>Team city</th>
+        <td mat-cell *matCellDef="let element">{{ element.Team_city }}</td>
+      </ng-container>
+
+      <!-- team_conference column -->
+      <ng-container matColumnDef="Team_Conference">
+        <th mat-header-cell *matHeaderCellDef>Team conference</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.Team_Conference }}
+        </td>
+      </ng-container>
+
+      <!-- team_conference_division column -->
+      <ng-container matColumnDef="Team_Conference_Division">
+        <th mat-header-cell *matHeaderCellDef>Team conference division</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.Team_Conference_Division }}
+        </td>
+      </ng-container>
+
+      <!-- team_logo_id column -->
+      <ng-container matColumnDef="Team_logo_id">
+        <th mat-header-cell *matHeaderCellDef>Team logo id</th>
+        <td mat-cell *matCellDef="let element">{{ element.Team_logo_id }}</td>
+      </ng-container>
+
+      <!-- arrest_count column -->
+      <ng-container matColumnDef="arrest_count">
+        <th mat-header-cell *matHeaderCellDef>Arrest count</th>
+        <td mat-cell *matCellDef="let element">{{ element.arrest_count }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[10, 20, 30]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

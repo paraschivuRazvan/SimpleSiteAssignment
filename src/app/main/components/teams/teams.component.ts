@@ -1,38 +1,38 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { CrimesService } from './crimes.service';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { TeamsService } from './teams.service';
 import { Subscription } from 'rxjs';
-import { Crime } from './crimes.model';
+
+import { Team } from './teams.model';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-crimes',
-  templateUrl: './crimes.component.html',
-  styleUrls: ['./crimes.component.scss'],
-  providers: [CrimesService]
+  selector: 'app-teams',
+  templateUrl: './teams.component.html',
+  styleUrls: ['./teams.component.scss']
 })
-export class CrimesComponent implements OnInit, OnDestroy {
+export class TeamsComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   public showLoading = false;
 
-  displayedColumns: string[] = ['category', 'arrest_count'];
-  dataSource = new MatTableDataSource<Crime>([]);
+  displayedColumns: string[] = ['Team', 'Team_preffered_name', 'Team_name', 'Team_city', 'Team_Conference', 'Team_Conference_Division', 'Team_logo_id', 'arrest_count'];
+  dataSource = new MatTableDataSource<Team>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private crimesService: CrimesService
+    private teamsService: TeamsService
   ) { }
 
   ngOnInit() {
-    this.getCrimes();
+    this.getTeams();
   }
 
-  private getCrimes() {
+  private getTeams() {
     this.showLoading = true;
-    this.subscription.add(this.crimesService.getTopCrimes().subscribe(
-      (resp: Crime[]) => {
+    this.subscription.add(this.teamsService.getTopTeams().subscribe(
+      (resp: any) => {
         this.setUpDataSource(resp);
       },
       error => {
@@ -42,7 +42,7 @@ export class CrimesComponent implements OnInit, OnDestroy {
     ));
   }
 
-  private setUpDataSource(resp: Crime[]) {
+  private setUpDataSource(resp: Team[]) {
     this.dataSource = new MatTableDataSource(resp);
     this.dataSource.paginator = this.paginator;
     this.showLoading = false;

@@ -1,38 +1,38 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { CrimesService } from './crimes.service';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { PlayersService } from './players.service';
 import { Subscription } from 'rxjs';
-import { Crime } from './crimes.model';
+import { Player } from './players.model';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-crimes',
-  templateUrl: './crimes.component.html',
-  styleUrls: ['./crimes.component.scss'],
-  providers: [CrimesService]
+  selector: 'app-players',
+  templateUrl: './players.component.html',
+  styleUrls: ['./players.component.scss'],
+  providers: [PlayersService]
 })
-export class CrimesComponent implements OnInit, OnDestroy {
+export class PlayersComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   public showLoading = false;
 
-  displayedColumns: string[] = ['category', 'arrest_count'];
-  dataSource = new MatTableDataSource<Crime>([]);
+  displayedColumns: string[] = ['Name', 'Team', 'Team_name', 'Team_city', 'Position', 'arrest_count'];
+  dataSource = new MatTableDataSource<Player>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private crimesService: CrimesService
+    private playersService: PlayersService
   ) { }
 
   ngOnInit() {
-    this.getCrimes();
+    this.getPlayers();
   }
 
-  private getCrimes() {
+  private getPlayers() {
     this.showLoading = true;
-    this.subscription.add(this.crimesService.getTopCrimes().subscribe(
-      (resp: Crime[]) => {
+    this.subscription.add(this.playersService.getTopPlayers().subscribe(
+      (resp: any) => {
         this.setUpDataSource(resp);
       },
       error => {
@@ -42,7 +42,7 @@ export class CrimesComponent implements OnInit, OnDestroy {
     ));
   }
 
-  private setUpDataSource(resp: Crime[]) {
+  private setUpDataSource(resp: Player[]) {
     this.dataSource = new MatTableDataSource(resp);
     this.dataSource.paginator = this.paginator;
     this.showLoading = false;

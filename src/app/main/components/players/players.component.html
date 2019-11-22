@@ -1,0 +1,56 @@
+<app-progress-spinner *ngIf="showLoading"></app-progress-spinner>
+<app-menu></app-menu>
+
+<div class="container">
+  <div class="heading">
+    Top players with mosth arrests in NFL
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <!-- name column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.Name }}</td>
+      </ng-container>
+
+      <!-- team column -->
+      <ng-container matColumnDef="Team">
+        <th mat-header-cell *matHeaderCellDef>Team</th>
+        <td mat-cell *matCellDef="let element">{{ element.Team }}</td>
+      </ng-container>
+
+      <!-- team_name column -->
+      <ng-container matColumnDef="Team_name">
+        <th mat-header-cell *matHeaderCellDef>Team name</th>
+        <td mat-cell *matCellDef="let element">{{ element.Team_name }}</td>
+      </ng-container>
+
+      <!-- team_city column -->
+      <ng-container matColumnDef="Team_city">
+        <th mat-header-cell *matHeaderCellDef>Team city</th>
+        <td mat-cell *matCellDef="let element">{{ element.Team_city }}</td>
+      </ng-container>
+
+      <!-- position column -->
+      <ng-container matColumnDef="Position">
+        <th mat-header-cell *matHeaderCellDef>Position</th>
+        <td mat-cell *matCellDef="let element">{{ element.Position }}</td>
+      </ng-container>
+
+      <!-- arrest_count column -->
+      <ng-container matColumnDef="arrest_count">
+        <th mat-header-cell *matHeaderCellDef>Arrest count</th>
+        <td mat-cell *matCellDef="let element">{{ element.arrest_count }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[10, 20, 30]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>

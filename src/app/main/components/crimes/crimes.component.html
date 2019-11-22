@@ -1,3 +1,32 @@
-<p>
-  crimes works!
-</p>
+<app-progress-spinner *ngIf="showLoading"></app-progress-spinner>
+<app-menu></app-menu>
+
+<div class="container">
+  <div class="heading">
+    Most popular crimes in NFL
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <!-- category column -->
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef>Category</th>
+        <td mat-cell *matCellDef="let element">{{ element.Category }}</td>
+      </ng-container>
+
+      <!-- arrest_count column -->
+      <ng-container matColumnDef="arrest_count">
+        <th mat-header-cell *matHeaderCellDef>Arrest count</th>
+        <td mat-cell *matCellDef="let element">{{ element.arrest_count }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[10, 20, 30]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>
