@@ -1,0 +1,30 @@
+<app-progress-spinner *ngIf="showLoading"></app-progress-spinner>
+<app-menu></app-menu>
+
+<div class="container">
+  <div class="heading">
+    Crime timeline
+  </div>
+
+  <div class="content">
+    Please select a crime to show its timeline
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Select crime</mat-label>
+      <mat-select
+        (selectionChange)="changeCrime($event)"
+        [(ngModel)]="currentCrime"
+      >
+        <mat-option *ngFor="let crime of crimesList" [value]="crime.Category">
+          {{ crime.Category }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <canvas #crimeTimelineChart></canvas>
+  </div>
+</div>

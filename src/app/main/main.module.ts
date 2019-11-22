@@ -12,8 +12,9 @@ import { FormsModule } from '@angular/forms';
 
 import {
   MatTableModule, MatPaginatorModule,
-  MatInputModule,
+  MatInputModule, MatSelectModule
 } from '@angular/material';
+import { CrimeTimelineComponent } from './components/crime-timeline/crime-timeline.component';
 
 export const ROUTES: Routes = [
   {
@@ -31,13 +32,18 @@ export const ROUTES: Routes = [
   {
     path: 'players',
     component: PlayersComponent
+  },
+  {
+    path: 'crime-timeline',
+    component: CrimeTimelineComponent
   }
 ];
 
 const Components = [
   CrimesComponent,
   PlayersComponent,
-  TeamsComponent
+  TeamsComponent,
+  CrimeTimelineComponent
 ];
 
 const Modules = [
@@ -47,6 +53,7 @@ const Modules = [
   MatTableModule,
   MatPaginatorModule,
   MatInputModule,
+  MatSelectModule,
   ReactiveFormsModule,
   FormsModule
 ];

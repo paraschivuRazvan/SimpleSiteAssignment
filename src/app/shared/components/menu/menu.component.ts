@@ -29,6 +29,11 @@ export class MenuComponent implements OnInit {
           this.router.navigate(['./main/teams']);
         }
         break;
+      case 'crime-timeline':
+        {
+          this.router.navigate(['./main/crime-timeline']);
+        }
+        break;
       default:
         {
           this.router.navigate(['./crimes']);
