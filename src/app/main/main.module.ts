@@ -12,7 +12,8 @@ import { FormsModule } from '@angular/forms';
 
 import {
   MatTableModule, MatPaginatorModule,
-  MatInputModule, MatSelectModule
+  MatInputModule, MatSelectModule,
+  MatDatepickerModule, MatNativeDateModule
 } from '@angular/material';
 import { CrimeTimelineComponent } from './components/crime-timeline/crime-timeline.component';
 
@@ -54,6 +55,8 @@ const Modules = [
   MatPaginatorModule,
   MatInputModule,
   MatSelectModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
   ReactiveFormsModule,
   FormsModule
 ];

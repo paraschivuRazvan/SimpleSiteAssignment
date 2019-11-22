@@ -19,13 +19,22 @@ export class CrimeTimelineService {
   ) { }
 
   // Get crime timeline
-  public getCrimeTimeline(crimeId) {
-    return this._http
-      .get(environment.rootEndpoint + environment.crimeEndpoint + '/timeline/' + crimeId)
-      .pipe(
-        retry(3), // retry a failed request up to 3 times
-        catchError(this.handleError) // then handle the error
-      );
+  public getCrimeTimeline(crimeId: string, startDate, endDate) {
+    if (startDate !== 0 && endDate !== 0) {
+      return this._http
+        .get(environment.rootEndpoint + environment.crimeEndpoint + '/timeline/' + crimeId + '?start_date=' + startDate + '&end_date=' + endDate)
+        .pipe(
+          retry(3), // retry a failed request up to 3 times
+          catchError(this.handleError) // then handle the error
+        );
+    } else {
+      return this._http
+        .get(environment.rootEndpoint + environment.crimeEndpoint + '/timeline/' + crimeId)
+        .pipe(
+          retry(3), // retry a failed request up to 3 times
+          catchError(this.handleError) // then handle the error
+        );
+    }
   }
 
   private handleError(error: HttpErrorResponse) {

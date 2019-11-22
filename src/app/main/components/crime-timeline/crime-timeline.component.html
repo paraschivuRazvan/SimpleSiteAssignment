@@ -10,7 +10,7 @@
     Please select a crime to show its timeline
   </div>
 
-  <div>
+  <div class="filters">
     <mat-form-field>
       <mat-label>Select crime</mat-label>
       <mat-select
@@ -22,6 +22,36 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+    <div>
+      <mat-form-field class="margin-left dateSelector">
+        <input
+          matInput
+          [matDatepicker]="start"
+          placeholder="From"
+          (ngModelChange)="startDateChange($event)"
+          [(ngModel)]="startDate"
+          (focus)="start.open()"
+          [max]="endDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+        <mat-datepicker #start></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="dateSelector">
+        <input
+          matInput
+          [matDatepicker]="end"
+          placeholder="To"
+          (ngModelChange)="endDateChange($event)"
+          [(ngModel)]="endDate"
+          (focus)="end.open()"
+          [min]="startDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+        <mat-datepicker #end></mat-datepicker>
+      </mat-form-field>
+    </div>
   </div>
 
   <div>

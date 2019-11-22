@@ -16,6 +16,8 @@ export class CrimeTimelineComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   public showLoading = false;
   lineChart;
+  startDate: Date = null;
+  endDate: Date = null;
 
   @ViewChild('crimeTimelineChart') private chartRef;
   crimesList: Crime[];
@@ -29,7 +31,7 @@ export class CrimeTimelineComponent implements OnInit, OnDestroy {
   }
 
   public changeCrime(event) {
-    this.getCrimeTimeline(this.currentCrime);
+    this.getCrimeTimeline(this.currentCrime, 0, 0);
   }
 
   private getCrimes() {
@@ -46,9 +48,9 @@ export class CrimeTimelineComponent implements OnInit, OnDestroy {
     ));
   }
 
-  private getCrimeTimeline(crimeId) {
+  private getCrimeTimeline(crimeId, startDate, endDate) {
     this.showLoading = true;
-    this.subscription.add(this.crimeTimelineService.getCrimeTimeline(crimeId).subscribe(
+    this.subscription.add(this.crimeTimelineService.getCrimeTimeline(crimeId, startDate, endDate).subscribe(
       (resp: any[]) => {
         this.drawChart(resp);
       },
@@ -57,6 +59,23 @@ export class CrimeTimelineComponent implements OnInit, OnDestroy {
         this.showLoading = false;
       }
     ));
+  }
+
+  startDateChange(event) {
+    this.startDate = event;
+
+    if (this.startDate != null && this.endDate != null) {
+      this.getCrimeTimeline(this.currentCrime, this.formatDateForFilter(this.startDate), this.formatDateForFilter(this.endDate));
+    }
+  }
+
+  endDateChange(event) {
+    this.endDate = event;
+
+    if (this.startDate != null && this.endDate != null) {
+
+      this.getCrimeTimeline(this.currentCrime, this.formatDateForFilter(this.startDate), this.formatDateForFilter(this.endDate));
+    }
   }
 
   private drawChart(resp) {
@@ -104,6 +123,12 @@ export class CrimeTimelineComponent implements OnInit, OnDestroy {
   private formatDate(data) {
     let date;
     date = moment(data).format('MMM YYYY');
+    return date;
+  }
+
+  private formatDateForFilter(data) {
+    let date;
+    date = moment(data).format('YYYY-MM-DD');
     return date;
   }
 
