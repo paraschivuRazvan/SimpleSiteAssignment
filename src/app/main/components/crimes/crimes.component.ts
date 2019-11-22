@@ -27,6 +27,10 @@ export class CrimesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getCrimes();
+
+    this.dataSource.filterPredicate = function (data, filter: string): boolean {
+      return data.Category.toLowerCase().includes(filter);
+    };
   }
 
   private getCrimes() {
@@ -46,6 +50,10 @@ export class CrimesComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource(resp);
     this.dataSource.paginator = this.paginator;
     this.showLoading = false;
+  }
+
+  public applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy() {

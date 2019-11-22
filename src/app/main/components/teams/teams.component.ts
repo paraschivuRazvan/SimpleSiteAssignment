@@ -27,6 +27,10 @@ export class TeamsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getTeams();
+
+    this.dataSource.filterPredicate = function (data, filter: string): boolean {
+      return data.Team.toLowerCase().includes(filter) || data.Team_preffered_name.toLowerCase().includes(filter) || data.Team_name.toLowerCase().includes(filter);
+    };
   }
 
   private getTeams() {
@@ -46,6 +50,10 @@ export class TeamsComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource(resp);
     this.dataSource.paginator = this.paginator;
     this.showLoading = false;
+  }
+
+  public applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy() {

@@ -7,7 +7,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { PlayersComponent } from './components/players/players.component';
 import { TeamsComponent } from './components/teams/teams.component';
 
-import { MatTableModule, MatPaginatorModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+
+import {
+  MatTableModule, MatPaginatorModule,
+  MatInputModule,
+} from '@angular/material';
 
 export const ROUTES: Routes = [
   {
@@ -39,7 +45,10 @@ const Modules = [
   RouterModule.forChild(ROUTES),
   SharedModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatInputModule,
+  ReactiveFormsModule,
+  FormsModule
 ];
 
 @NgModule({

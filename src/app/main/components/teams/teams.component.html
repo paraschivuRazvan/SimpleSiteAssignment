@@ -6,6 +6,16 @@
     Top teams with mosth arrests in NFL
   </div>
 
+  <div class="filter">
+    <mat-form-field>
+      <input
+        matInput
+        (keyup)="applyFilter($event.target.value)"
+        placeholder="Filter by team"
+      />
+    </mat-form-field>
+  </div>
+
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <!-- team column -->

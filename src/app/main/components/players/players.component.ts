@@ -27,6 +27,10 @@ export class PlayersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getPlayers();
+
+    this.dataSource.filterPredicate = function (data, filter: string): boolean {
+      return data.Name.toLowerCase().includes(filter);
+    };
   }
 
   private getPlayers() {
@@ -46,6 +50,10 @@ export class PlayersComponent implements OnInit, OnDestroy {
     this.dataSource = new MatTableDataSource(resp);
     this.dataSource.paginator = this.paginator;
     this.showLoading = false;
+  }
+
+  public applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy() {
