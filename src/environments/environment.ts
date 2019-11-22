@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  rootEndpoint: 'http://nflarrest.com/api/v1/',
+  crimeEndpoint: 'crime',
+  teamEndpoint: 'team',
+  playerEndpoint: 'player'
 };
 
 /*
